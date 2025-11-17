@@ -430,6 +430,31 @@
     <p class="footer-copy">© 2025 Qualiquest | All Rights Reserved</p>
   </footer>
 
+  <!-- CONTACT FORM MODAL -->
+  <div id="contactModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="contactTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" onclick="closeContactForm()" aria-label="Close contact form">&times;</button>
+      <h2 id="contactTitle">Contact Us</h2>
+
+      <form id="contactForm">
+        <label>Name <span>*</span></label>
+        <div class="name-row">
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+        </div>
+
+        <label>Email <span>*</span></label>
+        <input type="email" id="email" placeholder="Enter Email" required />
+
+        <label>Comments <span>*</span></label>
+        <textarea id="comments" rows="4" maxlength="600" placeholder="Please let us know what's on your mind." required></textarea>
+
+        <button class="modal-submit" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
 <!-- ===== CONTACT INFO MODAL ===== -->
 <div id="contactInfoModal" class="modal" aria-hidden="true">
   <div class="modal-content" style="max-width: 400px; text-align: center;">
@@ -469,7 +494,7 @@
 </div>
 
 
-   <!-- JS -->
+   <!-- SCRIPTS -->
   <script>
     // ===== HAMBURGER MENU =====
     const hamburger = document.getElementById("hamburger");
@@ -481,48 +506,79 @@
         : '<i class="fa-solid fa-bars"></i>';
     });
 
-    // ===== GOOGLE SHEET LINK =====
-    const talkBtn = document.getElementById("talkBtn");
-    talkBtn.addEventListener("click", () => {
-      window.open(
-        "https://docs.google.com/spreadsheets/d/1YJFvUk6JMxCiMb-gKr8txCC1U9mhC43v9zaSh6B-LBo/edit?usp=sharing",
-        "_blank"
-      );
-    });
-
     // ===== CONTACT INFO MODAL =====
     const contactInfoModal = document.getElementById("contactInfoModal");
-    document.querySelectorAll(".contact-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        contactInfoModal.style.display = "flex";
-        contactInfoModal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+    document.querySelectorAll('.contact-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        contactInfoModal.style.display = 'flex';
+        contactInfoModal.setAttribute('aria-hidden', 'false');
       });
     });
-
     function closeContactInfo() {
       contactInfoModal.style.display = "none";
-      document.body.style.overflow = "auto";
+      contactInfoModal.setAttribute('aria-hidden', 'true');
     }
 
+    // Close contact info on outside click or ESC
     window.addEventListener("click", e => {
       if (e.target === contactInfoModal) closeContactInfo();
     });
-
     window.addEventListener("keydown", e => {
       if (e.key === "Escape") closeContactInfo();
     });
 
-    // ===== PROCESS ACCORDION =====
-    const steps = document.querySelectorAll(".step");
-    steps.forEach(step => {
-      step.addEventListener("click", () => {
-        steps.forEach(s => {
-          if (s !== step) s.classList.remove("active");
-        });
-        step.classList.toggle("active");
-      });
+    // ===== CONTACT FORM MODAL =====
+    const contactModal = document.getElementById("contactModal");
+    const talkBtn = document.getElementById("talkBtn");
+
+    talkBtn.addEventListener("click", () => {
+      contactModal.style.display = "flex";
+      contactModal.setAttribute("aria-hidden", "false");
     });
+
+    function closeContactForm() {
+      contactModal.style.display = "none";
+      contactModal.setAttribute("aria-hidden", "true");
+    }
+
+    // Close modal on outside click or ESC
+    window.addEventListener("click", e => {
+      if (e.target === contactModal) closeContactForm();
+    });
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeContactForm();
+    });
+
+    // ===== SEND EMAIL USING GOOGLE APPS SCRIPT =====
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const payload = {
+        firstName: document.getElementById("firstName").value.trim(),
+        lastName: document.getElementById("lastName").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        comments: document.getElementById("comments").value.trim()
+      };
+
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbwiMQbnwgDHltbHWt8qvNyrnIRVNHWIPkb7DYjcVr2cHVu7JH7Q5BQkiJAE-3DzdWoH/exec", { // <-- REPLACE WITH YOUR WEB APP URL
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        alert("Your message has been sent successfully!");
+        document.getElementById("contactForm").reset();
+        closeContactForm();
+
+      } catch (error) {
+        console.error("Contact form error:", error);
+        alert("Something went wrong. Please try again.");
+      }
+    });
+
   </script>
+
 </body>
 </html>
