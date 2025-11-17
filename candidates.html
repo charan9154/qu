@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="png" href="logo.png">
+  <title>Candidates | QualiQuest</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #0a3d62;
+      --secondary: #6fdc8c;
+      --bg-light: #f4f7fb;
+      --text-dark: #0d1b2a;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-light);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 55px;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo img:hover { transform: scale(1.05); }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: white;
+    }
+
+    .contact-btn {
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 25px;
+      padding: 8px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    .contact-btn:hover { background: var(--primary); color: white; }
+
+    .hamburger {
+      display: none;
+      font-size: 1.6rem;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* ===== FLOATING SOCIAL ICONS ===== */
+    .floating-icons {
+      position: fixed;
+      right: 12px;
+      top: 45%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 9999;
+    }
+
+    .floating-icons a {
+      background: var(--secondary);
+      color: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .floating-icons a:hover { background: var(--primary); transform: scale(1.1); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+      text-align: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 61, 98, 0.65);
+    }
+    .hero-content {
+      z-index: 2;
+      max-width: 700px;
+      padding: 0 20px;
+    }
+    .hero-content h1 { font-size: 3em; margin-bottom: 15px; }
+    .hero-content p { font-size: 1.2em; margin-bottom: 20px; line-height: 1.5; }
+    .cta-btn {
+      background: var(--secondary);
+      color: var(--primary);
+      border: none;
+      border-radius: 25px;
+      padding: 12px 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .cta-btn:hover { background: var(--primary); color: white; }
+
+    /* ===== INTRO ===== */
+    .intro {
+      padding: 80px 60px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      background: white;
+    }
+    .intro-left {
+      flex: 1;
+      min-width: 300px;
+      font-size: 1.8em;
+      line-height: 1.5;
+      color: var(--primary);
+    }
+    .intro-right {
+      flex: 1;
+      min-width: 300px;
+      line-height: 1.6;
+      font-size: 1em;
+      color: var(--text-dark);
+    }
+    .highlight { color: var(--secondary); text-decoration: underline; }
+
+    /* ===== EXPECT ===== */
+    .expect {
+      padding: 80px 60px;
+      background: var(--bg-light);
+    }
+    .expect h2 {
+      font-size: 2em;
+      margin-bottom: 50px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--primary);
+    }
+    .expect-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid #ddd;
+      padding: 25px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .expect-item .left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+      min-width: 250px;
+    }
+    .expect-item .left span.num {
+      font-weight: bold;
+      font-size: 1.3em;
+      color: var(--primary);
+    }
+    .expect-item .left h3 {
+      font-size: 1.2em;
+      margin: 0;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .expect-item .right {
+      flex: 1.5;
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-width: 250px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-top {
+      background: var(--secondary);
+      color: var(--primary);
+      text-align: center;
+      padding: 40px;
+    }
+    .footer-bottom {
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 40px;
+    }
+    .footer-bottom a {
+     color: white;
+     text-decoration: none;
+     font-weight: 500;
+     transition: 0.3s;
+    }
+
+    .footer-bottom a:hover {
+     color: var(--secondary);
+     text-decoration: underline;
+    }
+    .footer-links ul { list-style: none; padding: 0; }
+    .footer-links ul li { margin-bottom: 6px; }
+    .footer-copy {
+      background: #0d1b2a;
+      color: #a5b2c3;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px;
+      box-shadow: 0 12px 40px rgba(20,28,45,.18);
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+      animation: fadeDown .3s;
+    }
+    @keyframes fadeDown {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: none; opacity: 1; }
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 2em;
+      color: var(--primary);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--secondary); }
+    form label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #eee;
+      border-radius: 8px;
+      font-size: 1em;
+      margin-bottom: 8px;
+      transition: border .2s;
+    }
+    form input:focus, form textarea:focus { border-color: var(--secondary); }
+    .modal-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px;
+      font-weight: 700;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-submit:hover { background: var(--secondary); color: var(--primary); }
+    .char-count { font-size: 0.9em; text-align: right; color: #888; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .navbar { flex-wrap: wrap; padding: 10px 15px; }
+      .hamburger { display: block; }
+      nav { display: none; width: 100%; background: var(--primary); position: absolute; top: 70px; left: 0; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+      nav ul { flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; }
+      nav.active { display: block; }
+      .contact-btn { position: absolute; right: 55px; top: 50%; transform: translateY(-50%); padding: 6px 14px; font-size: 0.85rem; }
+      .hero { height: 60vh; }
+    }
+
+    @media (max-width: 480px) {
+      .logo img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo"><img src="logo.jpg" alt="QualiQuest Logo"></div>
+    <div class="navbar-right">
+      <nav id="navMenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="client.html">Clients</a></li>
+          <li><a href="#" class="active">Candidates</a></li>
+        </ul>
+      </nav>
+      <button class="contact-btn">Contact</button>
+      <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- FLOATING SOCIAL ICONS -->
+  <div class="floating-icons">
+    <a href="https://www.linkedin.com/company/108471960" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Elevate Your Career with QualiQuest</h1>
+      <p>Are you looking for a career move that aligns with your goals and aspirations? Let’s make it happen together.</p>
+      <button class="cta-btn" id="talkBtn">Let's Talk</button>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-left">
+      We’re not your average recruiters — we’re your career consultants.
+    </div>
+    <div class="intro-right">
+      <p>Finding the right role is tough. We make it easier with tailored guidance and access to the best companies. At Qualiquest, we don’t just place you — we partner with you for success.</p>
+    </div>
+  </section>
+
+  <!-- EXPECT -->
+  <section class="expect">
+    <h2>What You Can Expect Working with Qualiquest</h2>
+    <div class="expect-item"><div class="left"><span class="num">01</span><span class="icon">✨</span><h3>Personalised Approach</h3></div><div class="right"><p>We understand your skills, goals, and personality to match you with roles that truly fit.</p></div></div>
+    <div class="expect-item"><div class="left"><span class="num">02</span><span class="icon">🏢</span><h3>Access to Leading Companies</h3></div><div class="right"><p>Work with top-tier organizations that value talent, growth, and innovation.</p></div></div>
+    <div class="expect-item"><div class="left"><span class="num">03</span><span class="icon">⭐</span><h3>Expert Guidance</h3></div><div class="right"><p>Receive mentorship and interview preparation to stand out from the crowd.</p></div></div>
+    <div class="expect-item"><div class="left"><span class="num">04</span><span class="icon">💬</span><h3>Transparent Communication</h3></div><div class="right"><p>We keep you informed every step of the way — no surprises, only progress.</p></div></div>
+    <div class="expect-item"><div class="left"><span class="num">05</span><span class="icon">🤝</span><h3>Ongoing Support</h3></div><div class="right"><p>From offer to onboarding — we ensure a smooth transition into your new role.</p></div></div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <h2>Let’s take your career to the next level with Qualiquest.</h2>
+    </div>
+    <div class="footer-bottom">
+      <div><h3>QUALIQUEST</h3><p>Empowering innovation. Elevating businesses.</p></div>
+      <div><h4>Quick Links</h4><ul style="list-style:none; padding:0; margin:0;">
+      <li><a href= "index.html">Home</a></li>
+      <li><a href= "about.html">About Us</a></li>
+      <li><a href= "client.html">Clients<a/></li></ul></div>
+      <div><h4>Contact</h4><p>📞 +1(469) XXX-XXXX</p><p>📧 info@qualiquesttech.com</p></div>
+    </div>
+    <p class="footer-copy">© 2025 Qualiquest | All Rights Reserved</p>
+  </footer>
+
+<!-- ===== CONTACT INFO MODAL ===== -->
+<div id="contactInfoModal" class="modal" aria-hidden="true">
+  <div class="modal-content" style="max-width: 400px; text-align: center;">
+    <button class="modal-close" onclick="closeContactInfo()" aria-label="Close">&times;</button>
+    <h2 style="color: var(--primary); margin-bottom: 20px;">Contact Information</h2>
+
+    <!-- Phone -->
+    <p>
+      <i class="fas fa-phone-alt" style="color: var(--secondary); margin-right: 10px;"></i>
+      <a href="tel:+919876543210" 
+         style="color: var(--secondary); font-weight: bold; text-decoration: none;">
+         +91 98765 43210
+      </a>
+    </p>
+
+    <!-- Email -->
+    <p>
+      <i class="fas fa-envelope" style="color: var(--secondary); margin-right: 10px;"></i>
+      <a href="mailto:info@qualiquesttech.com"
+         style="color: var(--secondary); font-weight: bold; text-decoration: none;">
+         info@qualiquesttech.com
+      </a>
+    </p>
+
+    <!-- Address with Tooltip -->
+    <p class="tooltip">
+      <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i>
+      <a href="https://www.google.com/maps?q=1701+ROYAL+LANE+DALLAS+TEXAS+75229"
+         target="_blank"
+         style="color: var(--secondary); font-weight: bold; text-decoration: none;">
+         1701 ROYAL LANE DALLAS TEXAS 75229
+         <i class="fas fa-external-link-alt"
+            style="margin-left: 6px; font-size: 0.85em; color: var(--secondary);"></i>
+      </a>
+    </p>
+  </div>
+</div>
+
+
+   <!-- JS -->
+  <script>
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      hamburger.innerHTML = navMenu.classList.contains("active")
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    // ===== GOOGLE SHEET LINK =====
+    const talkBtn = document.getElementById("talkBtn");
+    talkBtn.addEventListener("click", () => {
+      window.open(
+        "https://docs.google.com/spreadsheets/d/1YJFvUk6JMxCiMb-gKr8txCC1U9mhC43v9zaSh6B-LBo/edit?usp=sharing",
+        "_blank"
+      );
+    });
+
+    // ===== CONTACT INFO MODAL =====
+    const contactInfoModal = document.getElementById("contactInfoModal");
+    document.querySelectorAll(".contact-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        contactInfoModal.style.display = "flex";
+        contactInfoModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeContactInfo() {
+      contactInfoModal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener("click", e => {
+      if (e.target === contactInfoModal) closeContactInfo();
+    });
+
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeContactInfo();
+    });
+
+    // ===== PROCESS ACCORDION =====
+    const steps = document.querySelectorAll(".step");
+    steps.forEach(step => {
+      step.addEventListener("click", () => {
+        steps.forEach(s => {
+          if (s !== step) s.classList.remove("active");
+        });
+        step.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>
