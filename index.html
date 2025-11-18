@@ -185,7 +185,6 @@
       transform: scale(1.08);
     }
 
-    /* ===== HERO CAPTIONS ===== */
     .hero-caption {
       position: absolute;
       bottom: 0;
@@ -301,6 +300,7 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      text-align: center;
     }
 
     .service-hover-img {
@@ -324,6 +324,124 @@
     .service-box:hover h2, .service-box:hover .service-quote {
       color: white;
     }
+    /* ===== MODAL ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px;
+      box-shadow: 0 12px 40px rgba(20,28,45,.18);
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+      animation: fadeDown .3s ease;
+    }
+
+    @keyframes fadeDown {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 2em;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .modal-close:hover { color: var(--secondary); }
+
+  /* ===== CONTACT FORM STYLES (IMPROVED) ===== */
+    #contactModal .modal-content {
+      max-width: 480px;
+      padding: 28px;
+      border-radius: 14px;
+    }
+
+    #contactModal h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    #contactModal label {
+      font-weight: 600;
+      margin-top: 12px;
+      display: block;
+    }
+
+    #contactModal label span { color: red; }
+
+    #contactModal input,
+    #contactModal textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    #contactModal input:focus,
+    #contactModal textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 5px rgba(10, 61, 98, 0.15);
+    }
+
+    .name-row { display: flex; gap: 10px; }
+    .name-row input { flex: 1; }
+
+    .modal-submit {
+      width: 100%;
+      margin-top: 18px;
+      background: var(--secondary);
+      color: var(--primary);
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .modal-submit:hover { background: var(--primary); color: #fff; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .navbar { flex-wrap: wrap; padding: 10px 15px; }
+      .hamburger { display: block; }
+      nav { display: none; width: 100%; background: var(--primary); position: absolute; top: 70px; left: 0; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+      nav ul { flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; }
+      nav.active { display: block; }
+      .contact-btn { position: absolute; right: 55px; top: 50%; transform: translateY(-50%); padding: 6px 14px; font-size: 0.85rem; }
+      .hero { height: 60vh; }
+      .hero-content h1 { font-size: 2em; }
+      .hero-content p { font-size: 1em; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .logo img { height: 40px; }
+      .cta-btn, .contact-btn { padding: 10px 18px; font-size: 0.9em; }
+      .intro, .section-dark { padding: 40px 20px; margin: 30px; }
+      .modal-content { width: 95vw; padding: 15px; }
+    }
 
     /* ===== FOOTER ===== */
     .footer-top {
@@ -333,7 +451,7 @@
       padding: 50px 20px;
     }
 
- .footer-bottom {
+    .footer-bottom {
       background: var(--primary);
       color: white;
       display: flex;
@@ -354,7 +472,6 @@
      text-decoration: underline;
     }
 
-    /* ===== MODALS ===== */
     .modal {
       position: fixed;
       inset: 0;
@@ -390,12 +507,6 @@
       color: var(--secondary);
     }
 
-    @keyframes fadeDown {
-      from { transform: translateY(-40px); opacity: 0; }
-      to { transform: none; opacity: 1; }
-    }
-
-    /* ===== MOBILE VIEW MENU ===== */
     @media (max-width: 768px) {
       .navbar { padding: 10px 15px; }
       .logo img { height: 40px; }
@@ -412,6 +523,52 @@
       nav ul { flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; }
       nav ul li a { font-size: 1rem; color: white; }
       nav.active { display: block; }
+    }
+
+
+   /* CONTACT ROEM MODALS ALIGNMENTS */
+
+    .modal {
+      position:fixed; inset:0;
+          background:rgba(0,0,0,.25); 
+          z-index:9999;
+      display:none; 
+           align-items:center; justify-content:center; }
+    .modal-content {
+         background:#fff; border-radius:18px; padding:26px;
+         box-shadow:0 12px 40px rgba(20,28,45,.18); 
+         width:92%; max-width:520px; position:relative; }
+    .modal-close {
+         position:absolute; top:14px; right:14px; 
+         background:transparent; border:none; 
+         font-size:1.6rem; color:var(--primary); cursor:pointer; }
+    .modal-close:hover {
+         color:var(--secondary); }
+    .form-row { 
+         display:flex; gap:10px; }
+    .form-row .half {
+         flex:1; }
+    .form-field {
+         width:100%; padding:10px 12px; margin-top:8px;
+         border:1px solid #ccc; border-radius:10px;
+         font-size:0.95rem; outline:none; }
+    .form-field:focus { 
+           border-color:var(--primary);
+           box-shadow:0 0 6px rgba(10,61,98,.12); }
+    .modal-submit {
+           width:100%; margin-top:16px; 
+           background:var(--secondary); 
+           color:var(--primary); padding:12px; 
+           border:none; border-radius:25px; 
+           font-weight:600; cursor:pointer; }
+
+    @media (max-width:768px) {
+      .navbar { padding:10px 15px; }
+      .logo img { height:40px; }
+      .hamburger { display:block; }
+      nav { display:none; width:100%; background:linear-gradient(180deg,var(--primary),var(--secondary)); position:absolute; top:70px; left:0; border-bottom-left-radius:12px; border-bottom-right-radius:12px; }
+      nav.active { display:block; }
+      nav ul { flex-direction:column; padding:20px 0; gap:16px; }
     }
   </style>
 </head>
@@ -439,8 +596,8 @@
 
   <!-- ===== FLOATING SOCIAL ICONS ===== -->
   <div class="floating-icons">
-    <a href="https://www.linkedin.com/company/108471960" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-    <a href="https://www.instagram.com/qualiquesttech?igsh=cTJ3OWlhYmpkOTlx&utm_source=qr" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/company/108471960" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://www.instagram.com/qualiquesttech?igsh=cTJ3OWlhYmpkOTlx&utm_source=qr" target="_blank"><i class="fa-brands fa-instagram"></i></a>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -459,8 +616,9 @@
         <div class="hero-caption">Analytics Driven</div>
       </div>
     </div>
+
     <div class="hero-text">
-      <button class="upload-btn" id="uploadCVBtn">Upload Your CV</button>
+      <button class="upload-btn" id="quickEnquiryBtn">Quick Enquiry</button>
       <p>QualiQuest empowers businesses through innovation in IT and Marketing. We specialize in SaaS Applications, Full-Stack Development, AI-Driven Solutions, and Digital Transformation that help our clients scale smarter and faster.</p>
     </div>
   </section>
@@ -487,21 +645,29 @@
   <section class="services">
     <h3>SERVICES</h3>
     <h1>What We Offer</h1>
+
     <div class="service-grid">
-      <div class="service-box">
+
+      <!-- Clients -->
+      <a href="client.html" class="service-box" style="text-decoration:none; color:inherit;">
         <h2>Clients</h2>
         <p class="service-quote">Find talent that drives growth.</p>
-        <img src="clients-hover.jpg" class="service-hover-img" alt="" />
-      </div>
-      <div class="service-box">
+        <img src="clients-hover.jpg" class="service-hover-img" alt="">
+      </a>
+
+      <!-- Candidates -->
+      <a href="candidates.html" class="service-box" style="text-decoration:none; color:inherit;">
         <h2>Candidates</h2>
         <p class="service-quote">Get access to the best QualiQuest roles.</p>
-        <img src="candidates-hover.jpg" class="service-hover-img" alt="" />
-      </div>
-      <div class="service-box">
-        <h2>Contact Us</h2>
-        <img src="contact-hover.jpg" class="service-hover-img" alt="" />
-      </div>
+        <img src="candidates-hover.jpg" class="service-hover-img" alt="">
+      </a>
+
+      <!-- Contact Us tile must open Contact Info modal -->
+      <a href="#" class="service-box" id="openContactFromService" role="listitem" aria-label="Contact information">
+         <h2>Contact Us</h2>
+         <p>Phone, email & address</p>
+         <img src="contact-hover.jpg" alt="" class="service-hover-img" aria-hidden="true">
+      </a>
     </div>
   </section>
 
@@ -510,33 +676,47 @@
     <div class="footer-top">
       <h2>Your trusted partner for IT Services, SaaS Development, and Digital Marketing Excellence.</h2>
     </div>
+
     <div class="footer-bottom">
-      <div><h3>QUALIQUEST</h3><p>Empowering innovation. Elevating businesses.</p></div>
-      <div><h4>Quick Links</h4><ul style="list-style:none; padding:0; margin:0;">
-      <li><a href= "about.html">About Us</a></li>
-      <li><a href= "client.html">Clients</a></li>
-      <li><a href= "candidates.html">Candidates<a/></li></ul></div>
-      <div><h4>Contact</h4><p>📞 +1(469) XXX-XXXX</p><p>📧 info@qualiquesttech.com</p></div>
+      <div>
+        <h3>QUALIQUEST</h3>
+        <p>Empowering innovation. Elevating businesses.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="client.html">Clients</a></li>
+          <li><a href="candidates.html">Candidates</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p>📞 +1(469) XXX-XXXX</p>
+        <p>📧 info@qualiquesttech.com</p>
+      </div>
     </div>
+
     <p class="footer-copy">© 2025 QualiQuest | All Rights Reserved</p>
   </footer>
 
-<!-- ===== CONTACT INFO MODAL ===== -->
+
+<!-- ================= CONTACT INFO MODAL ================= -->
 <div id="contactInfoModal" class="modal" aria-hidden="true">
   <div class="modal-content" style="max-width: 400px; text-align: center;">
     <button class="modal-close" onclick="closeContactInfo()" aria-label="Close">&times;</button>
     <h2 style="color: var(--primary); margin-bottom: 20px;">Contact Information</h2>
 
-    <!-- Phone -->
     <p>
       <i class="fas fa-phone-alt" style="color: var(--secondary); margin-right: 10px;"></i>
-      <a href="tel:+919876543210" 
+      <a href="tel:+919876543210"
          style="color: var(--secondary); font-weight: bold; text-decoration: none;">
          +91 98765 43210
       </a>
     </p>
 
-    <!-- Email -->
     <p>
       <i class="fas fa-envelope" style="color: var(--secondary); margin-right: 10px;"></i>
       <a href="mailto:info@qualiquesttech.com"
@@ -545,7 +725,6 @@
       </a>
     </p>
 
-    <!-- Address with Tooltip -->
     <p class="tooltip">
       <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i>
       <a href="https://www.google.com/maps?q=1701+ROYAL+LANE+DALLAS+TEXAS+75229"
@@ -559,13 +738,54 @@
   </div>
 </div>
 
+ <!-- CONTACT FORM MODAL (NEW) -->
+  <div id="contactFormModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="contactFormTitle">
+      <button class="modal-close" onclick="closeContactForm()" aria-label="Close contact form">&times;</button>
+      <h2 id="contactFormTitle" style="color:var(--primary); margin-bottom:12px;">Quick Enquiry</h2>
 
-  <!-- ===== SCRIPTS ===== -->
+      <form id="contactForm" autocomplete="on" novalidate>
+        <div class="form-row">
+          <div class="half">
+            <label for="firstName">First name <span style="color:red">*</span></label>
+            <input id="firstName" name="firstName" class="form-field" type="text" placeholder="First name" required>
+          </div>
+          <div class="half">
+            <label for="lastName">Last name</label>
+            <input id="lastName" name="lastName" class="form-field" type="text" placeholder="Last name">
+          </div>
+        </div>
+
+        <label for="email">Email <span style="color:red">*</span></label>
+        <input id="email" name="email" class="form-field" type="email" placeholder="you@example.com" required>
+
+        <label for="phone">Phone <span style="color:red">*</span></label>
+        <input id="phone" name="phone" class="form-field" type="tel" placeholder="+X XXX XXX XXXXX" required>
+
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" class="form-field" rows="5" maxlength="800" placeholder="Tell us about your requirement..."></textarea>
+
+        <button type="submit" class="modal-submit">Send Enquiry</button>
+      </form>
+
+      <p id="contactFormMsg" style="display:none; margin-top:12px; font-weight:600;"></p>
+    </div>
+  </div>
+
+
+
+
+ <!-- SCRIPTS -->
   <script>
-    // ===== Hamburger Menu =====
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.getElementById("navMenu");
+    // ---------- Config ----------
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzNDKE79jLNyWlVoPKDAesg6vohHL5EAq17CvkG62z9dSbC_Lcs9amHxS8AkYYOX1kRDA/exec";
 
+    // ---------- Helpers ----------
+    const $ = (id) => document.getElementById(id);
+
+    // ---------- NAV Hamburgers ----------
+    const hamburger = $("hamburger");
+    const navMenu = $("navMenu");
     if (hamburger && navMenu) {
       hamburger.addEventListener("click", () => {
         navMenu.classList.toggle("active");
@@ -575,24 +795,26 @@
       });
     }
 
-    // Close mobile nav when link clicked
     document.querySelectorAll("nav ul li a").forEach(link => {
       link.addEventListener("click", () => {
-        if (navMenu.classList.contains("active")) {
+        if (navMenu && navMenu.classList.contains("active")) {
           navMenu.classList.remove("active");
           if (hamburger) hamburger.innerHTML = '<i class="fa-solid fa-bars"></i>';
         }
       });
     });
 
-    // ===== Contact Info Modal =====
-    const contactInfoModal = document.getElementById("contactInfoModal");
+    // ---------- Modals ----------
+    const contactInfoModal = $("contactInfoModal");
+    const contactFormModal = $("contactFormModal");
+
+    // Open contact info (header Contact button)
     document.querySelectorAll('.contact-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (contactInfoModal) {
-          contactInfoModal.style.display = 'flex';
-          contactInfoModal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+          contactInfoModal.style.display = "flex";
+          contactInfoModal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
         }
       });
     });
@@ -600,31 +822,120 @@
     function closeContactInfo() {
       if (contactInfoModal) {
         contactInfoModal.style.display = "none";
-        contactInfoModal.setAttribute('aria-hidden', 'true');
+        contactInfoModal.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "auto";
       }
     }
 
-    // Close contact info modal on click outside
-    window.addEventListener('click', function (e) {
-      if (e.target === contactInfoModal) closeContactInfo();
-    });
+    // Quick Enquiry opens contactFormModal
+    const quickBtn = $("quickEnquiryBtn");
+    if (quickBtn && contactFormModal) {
+      quickBtn.addEventListener("click", () => {
+        contactFormModal.style.display = "flex";
+        contactFormModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    }
 
-    // Accessibility: close modals on Esc
-    window.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
+    // Service Contact button (in services) opens contactInfoModal
+    const serviceContactBtn = $("openContactInfoModel");
+    if (serviceContactBtn && contactInfoModal) {
+      serviceContactBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        contactInfoModal.style.display = "flex";
+        contactInfoModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    }
+
+    function closeContactForm() {
+      if (contactFormModal) {
+        contactFormModal.style.display = "none";
+        contactFormModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "auto";
+      }
+    }
+
+    // Close modals on outside click or Esc
+    window.addEventListener("click", (e) => {
+      if (e.target === contactInfoModal) closeContactInfo();
+      if (e.target === contactFormModal) closeContactForm();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeContactForm();
         closeContactInfo();
       }
     });
 
-    // ===== Upload CV Button Opens Google Sheet =====
-    const uploadCVBtn = document.getElementById("uploadCVBtn");
-    if (uploadCVBtn) {
-      uploadCVBtn.addEventListener("click", () => {
-        // Opens the sheet in a new tab
-        window.open("https://docs.google.com/spreadsheets/d/1YJFvUk6JMxCiMb-gKr8txCC1U9mhC43v9zaSh6B-LBo/edit?usp=sharing", "_blank");
+    // ---------- Contact Form Submission ----------
+    const contactForm = $("contactForm");
+    const contactFormMsg = $("contactFormMsg");
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (evt) {
+        evt.preventDefault();
+
+        // Basic client-side validation
+        const firstName = $("firstName").value.trim();
+        const lastName = $("lastName").value.trim();
+        const email = $("email").value.trim();
+        const phone = $("phone").value.trim();
+        const comments = $("comments").value.trim();
+
+        if (!firstName || !email || !phone) {
+          contactFormMsg.style.display = "block";
+          contactFormMsg.style.color = "crimson";
+          contactFormMsg.textContent = "Please complete the required fields (First name, Email, Phone).";
+          return;
+        }
+
+        contactFormMsg.style.display = "block";
+        contactFormMsg.style.color = "var(--primary)";
+        contactFormMsg.textContent = "Sending...";
+
+        const payload = {
+          firstName, lastName, email, phone, comments
+        };
+
+        try {
+          // send to Apps Script
+          await fetch(WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          contactFormMsg.style.color = "green";
+          contactFormMsg.textContent = "Thanks — your enquiry was sent. We'll get back shortly.";
+          contactForm.reset();
+
+          // close modal after short delay
+          setTimeout(() => {
+            closeContactForm();
+            contactFormMsg.style.display = "none";
+          }, 1400);
+
+        } catch (err) {
+          console.error("Contact form error:", err);
+          contactFormMsg.style.color = "crimson";
+          contactFormMsg.textContent = "Something went wrong. Please try again or email info@qualiquesttech.com.";
+        }
       });
     }
+
+    // Accessibility: focus trap basic (bring focus to first field when modal opens)
+    const focusFirstInForm = () => {
+      if (contactFormModal && contactFormModal.style.display === "flex") {
+        const el = contactFormModal.querySelector("input, textarea, button");
+        if (el) el.focus();
+      }
+    };
+    // observe modal open and focus
+    const obs = new MutationObserver(() => focusFirstInForm());
+    if (contactFormModal) obs.observe(contactFormModal, { attributes: true });
+
   </script>
 </body>
 </html>
