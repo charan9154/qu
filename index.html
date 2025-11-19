@@ -694,7 +694,7 @@
 
       <div>
         <h4>Contact</h4>
-        <p>📞 +1(469) XXX-XXXX</p>
+        <p>📞 +1 (512) 954-5335</p>
         <p>📧 info@qualiquesttech.com</p>
       </div>
     </div>
@@ -711,9 +711,9 @@
 
     <p>
       <i class="fas fa-phone-alt" style="color: var(--secondary); margin-right: 10px;"></i>
-      <a href="tel:+919876543210"
+      <a href="tel:+1 (512) 954-5335"
          style="color: var(--secondary); font-weight: bold; text-decoration: none;">
-         +91 98765 43210
+         +1 (512) 954-5335
       </a>
     </p>
 
@@ -776,167 +776,166 @@
 
 
  <!-- SCRIPTS -->
-  <script>
-    // ---------- Config ----------
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzNDKE79jLNyWlVoPKDAesg6vohHL5EAq17CvkG62z9dSbC_Lcs9amHxS8AkYYOX1kRDA/exec";
+<script>
+  // ---------- Config ----------
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzNDKE79jLNyWlVoPKDAesg6vohHL5EAq17CvkG62z9dSbC_Lcs9amHxS8AkYYOX1kRDA/exec";
 
-    // ---------- Helpers ----------
-    const $ = (id) => document.getElementById(id);
+  // ---------- Helpers ----------
+  const $ = (id) => document.getElementById(id);
 
-    // ---------- NAV Hamburgers ----------
-    const hamburger = $("hamburger");
-    const navMenu = $("navMenu");
-    if (hamburger && navMenu) {
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        hamburger.innerHTML = navMenu.classList.contains("active")
-          ? '<i class="fa-solid fa-xmark"></i>'
-          : '<i class="fa-solid fa-bars"></i>';
-      });
-    }
-
-    document.querySelectorAll("nav ul li a").forEach(link => {
-      link.addEventListener("click", () => {
-        if (navMenu && navMenu.classList.contains("active")) {
-          navMenu.classList.remove("active");
-          if (hamburger) hamburger.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        }
-      });
+  // ---------- NAV Hamburgers ----------
+  const hamburger = $("hamburger");
+  const navMenu = $("navMenu");
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      hamburger.innerHTML = navMenu.classList.contains("active")
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
     });
+  }
 
-    // ---------- Modals ----------
-    const contactInfoModal = $("contactInfoModal");
-    const contactFormModal = $("contactFormModal");
-
-    // Open contact info (header Contact button)
-    document.querySelectorAll('.contact-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (contactInfoModal) {
-          contactInfoModal.style.display = "flex";
-          contactInfoModal.setAttribute("aria-hidden", "false");
-          document.body.style.overflow = "hidden";
-        }
-      });
-    });
-
-    function closeContactInfo() {
-      if (contactInfoModal) {
-        contactInfoModal.style.display = "none";
-        contactInfoModal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "auto";
+  document.querySelectorAll("nav ul li a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (navMenu && navMenu.classList.contains("active")) {
+        navMenu.classList.remove("active");
+        if (hamburger) hamburger.innerHTML = '<i class="fa-solid fa-bars"></i>';
       }
-    }
+    });
+  });
 
-    // Quick Enquiry opens contactFormModal
-    const quickBtn = $("quickEnquiryBtn");
-    if (quickBtn && contactFormModal) {
-      quickBtn.addEventListener("click", () => {
-        contactFormModal.style.display = "flex";
-        contactFormModal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-      });
-    }
+  // ---------- Modals ----------
+  const contactInfoModal = $("contactInfoModal");
+  const contactFormModal = $("contactFormModal");
 
-    // Service Contact button (in services) opens contactInfoModal
-    const serviceContactBtn = $("openContactInfoModel");
-    if (serviceContactBtn && contactInfoModal) {
-      serviceContactBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+  // Open contact info (header Contact button) - works for any element with .contact-btn
+  document.querySelectorAll('.contact-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (contactInfoModal) {
         contactInfoModal.style.display = "flex";
         contactInfoModal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
-      });
-    }
-
-    function closeContactForm() {
-      if (contactFormModal) {
-        contactFormModal.style.display = "none";
-        contactFormModal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "auto";
-      }
-    }
-
-    // Close modals on outside click or Esc
-    window.addEventListener("click", (e) => {
-      if (e.target === contactInfoModal) closeContactInfo();
-      if (e.target === contactFormModal) closeContactForm();
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeContactForm();
-        closeContactInfo();
       }
     });
+  });
 
-    // ---------- Contact Form Submission ----------
-    const contactForm = $("contactForm");
-    const contactFormMsg = $("contactFormMsg");
+  function closeContactInfo() {
+    if (contactInfoModal) {
+      contactInfoModal.style.display = "none";
+      contactInfoModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "auto";
+    }
+  }
 
-    if (contactForm) {
-      contactForm.addEventListener("submit", async function (evt) {
-        evt.preventDefault();
+  // Quick Enquiry opens contactFormModal
+  const quickBtn = $("quickEnquiryBtn");
+  if (quickBtn && contactFormModal) {
+    quickBtn.addEventListener("click", () => {
+      contactFormModal.style.display = "flex";
+      contactFormModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    });
+  }
 
-        // Basic client-side validation
-        const firstName = $("firstName").value.trim();
-        const lastName = $("lastName").value.trim();
-        const email = $("email").value.trim();
-        const phone = $("phone").value.trim();
-        const comments = $("comments").value.trim();
+  // ===== FIX: Service "Contact Us" tile =====
+  // Your tile has id="openContactFromService" — wire it correctly:
+  const serviceContactBtn = $("openContactFromService");
+  if (serviceContactBtn && contactInfoModal) {
+    serviceContactBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      contactInfoModal.style.display = "flex";
+      contactInfoModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    });
+  }
 
-        if (!firstName || !email || !phone) {
-          contactFormMsg.style.display = "block";
-          contactFormMsg.style.color = "crimson";
-          contactFormMsg.textContent = "Please complete the required fields (First name, Email, Phone).";
-          return;
-        }
+  function closeContactForm() {
+    if (contactFormModal) {
+      contactFormModal.style.display = "none";
+      contactFormModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "auto";
+    }
+  }
 
+  // Close modals on outside click or Esc
+  window.addEventListener("click", (e) => {
+    if (e.target === contactInfoModal) closeContactInfo();
+    if (e.target === contactFormModal) closeContactForm();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeContactForm();
+      closeContactInfo();
+    }
+  });
+
+  // ---------- Contact Form Submission ----------
+  const contactForm = $("contactForm");
+  const contactFormMsg = $("contactFormMsg");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", async function (evt) {
+      evt.preventDefault();
+
+      // Basic client-side validation
+      const firstName = $("firstName").value.trim();
+      const lastName = $("lastName").value.trim();
+      const email = $("email").value.trim();
+      const phone = $("phone").value.trim();
+      const comments = $("comments").value.trim();
+
+      if (!firstName || !email || !phone) {
         contactFormMsg.style.display = "block";
-        contactFormMsg.style.color = "var(--primary)";
-        contactFormMsg.textContent = "Sending...";
-
-        const payload = {
-          firstName, lastName, email, phone, comments
-        };
-
-        try {
-          // send to Apps Script
-          await fetch(WEB_APP_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          contactFormMsg.style.color = "green";
-          contactFormMsg.textContent = "Thanks — your enquiry was sent. We'll get back shortly.";
-          contactForm.reset();
-
-          // close modal after short delay
-          setTimeout(() => {
-            closeContactForm();
-            contactFormMsg.style.display = "none";
-          }, 1400);
-
-        } catch (err) {
-          console.error("Contact form error:", err);
-          contactFormMsg.style.color = "crimson";
-          contactFormMsg.textContent = "Something went wrong. Please try again or email info@qualiquesttech.com.";
-        }
-      });
-    }
-
-    // Accessibility: focus trap basic (bring focus to first field when modal opens)
-    const focusFirstInForm = () => {
-      if (contactFormModal && contactFormModal.style.display === "flex") {
-        const el = contactFormModal.querySelector("input, textarea, button");
-        if (el) el.focus();
+        contactFormMsg.style.color = "crimson";
+        contactFormMsg.textContent = "Please complete the required fields (First name, Email, Phone).";
+        return;
       }
-    };
-    // observe modal open and focus
-    const obs = new MutationObserver(() => focusFirstInForm());
-    if (contactFormModal) obs.observe(contactFormModal, { attributes: true });
 
-  </script>
+      contactFormMsg.style.display = "block";
+      contactFormMsg.style.color = "var(--primary)";
+      contactFormMsg.textContent = "Sending...";
+
+      const payload = { firstName, lastName, email, phone, comments };
+
+      try {
+        // send to Apps Script
+        await fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        contactFormMsg.style.color = "green";
+        contactFormMsg.textContent = "Thanks — your enquiry was sent. We'll get back shortly.";
+        contactForm.reset();
+
+        // close modal after short delay
+        setTimeout(() => {
+          closeContactForm();
+          contactFormMsg.style.display = "none";
+        }, 1400);
+
+      } catch (err) {
+        console.error("Contact form error:", err);
+        contactFormMsg.style.color = "crimson";
+        contactFormMsg.textContent = "Something went wrong. Please try again or email info@qualiquesttech.com.";
+      }
+    });
+  }
+
+  // Accessibility: focus trap basic (bring focus to first field when modal opens)
+  const focusFirstInForm = () => {
+    if (contactFormModal && contactFormModal.style.display === "flex") {
+      const el = contactFormModal.querySelector("input, textarea, button");
+      if (el) el.focus();
+    }
+  };
+  const obs = new MutationObserver(() => focusFirstInForm());
+  if (contactFormModal) obs.observe(contactFormModal, { attributes: true });
+</script>
+
 </body>
 </html>
 
