@@ -565,6 +565,17 @@
     window.addEventListener("keydown", e => {
       if (e.key === "Escape") closeContactForm();
     });
+    
+     // ===== PROCESS ACCORDION =====
+    const steps = document.querySelectorAll(".step");
+    steps.forEach(step => {
+      step.addEventListener("click", () => {
+        steps.forEach(s => {
+          if (s !== step) s.classList.remove("active");
+        });
+        step.classList.toggle("active");
+      });
+    });
 
     // ===== SEND EMAIL USING GOOGLE APPS SCRIPT =====
     document.getElementById("contactForm").addEventListener("submit", async function(e) {
@@ -599,5 +610,6 @@
 
 </body>
 </html>
+
 
 
